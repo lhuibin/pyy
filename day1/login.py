@@ -15,7 +15,7 @@ welcomeInfo = input("Hello! What's do you want? Login(l) or Register(r)")
 if welcomeInfo == 'r':
 	usrinput_name = input('Please input your username:')
 	usrinput_pwd = input('Please input your password:')
-	usr_pwd[usrinput_name] = usrinput_pwd
+	usr_pwd[usrinput_name] = usrinput_pwd #这是一个字典，添加新用户
 	with open('usr_pwd.json', 'w') as f:
 		f.write(json.dumps(usr_pwd)) #新用户注册数据存储
 
