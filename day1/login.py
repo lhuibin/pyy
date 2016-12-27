@@ -1,30 +1,28 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
 import json
 
-# 读取用户数据
-with open('usr_pwd.json', 'r') as f:
-	usr_pwd = json.loads(f.read())
-with open('usr_locked.json', 'r') as f:
-	usr_locked = json.loads(f.read())
-
 # 登陆入口，供用户选择注册新用户或登陆
-welcomeInfo = input("Hello! What's do you want? Login(l) or Register(r)")
+welcomeInfo = raw_input("Hello! What's do you want? Login(l) or Register(r)")
 
 if welcomeInfo == 'r':
-	usrinput_name = input('Please input your username:')
-	usrinput_pwd = input('Please input your password:')
+	usrinput_name = raw_input('Please input your username:')
+	usrinput_pwd = raw_input('Please input your password:')
+	with open('usr_pwd.json', 'r') as f:
+		usr_pwd = json.loads(f.read()) # 读取用户信息
 	usr_pwd[usrinput_name] = usrinput_pwd #这是一个字典，添加新用户
 	with open('usr_pwd.json', 'w') as f:
 		f.write(json.dumps(usr_pwd)) #新用户注册数据存储
+elif welcomeInfo != 'r' and welcomeInfo != 'l':
+	print('Please input the correct order(Login(l) or Register(r))')
 
 count1 = 0 #用户名输入次数计数器
 count2 = 0 #密码输入次数计数器
 
 # 登陆程序
 while welcomeInfo == 'l':
-	usr_name = input('Please input your username:')
+	usr_name = raw_input('Please input your username:')
 
 	with open('usr_locked.json', 'r') as f:  #读取锁定用户数据，判断是否是已锁定用户
 		lock_usr = json.loads(f.read())  
@@ -43,7 +41,7 @@ while welcomeInfo == 'l':
 			break
 		continue
 
-	usr_pwd = input('please input your password:')
+	usr_pwd = raw_input('please input your password:')
 	if usr_pwd == n[usr_name]:  # 校验密码
 		print('Welcome! %s' % usr_name)
 		break
@@ -53,6 +51,8 @@ while welcomeInfo == 'l':
 		print('Sorry! Your password are wrong. You had %s times!' % (3-count2))
 		if count2 >= 3:
 			print('Warning! Your account was locked, please contract the Administrator.')
+			with open('usr_locked.json', 'r') as f:
+				usr_locked = json.loads(f.read())
 			usr_locked.append(usr_name)
 			with open('usr_locked.json', 'w') as f:
 				f.write(json.dumps(usr_locked))
