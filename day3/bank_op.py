@@ -91,7 +91,7 @@ while True:
 		print('存款成功!\n请继续选择:')
 		op_list()
 	elif usr_input == '3':
-		reverse_usr = input('请输入收款人账户：')
+		reverse_usr = raw_input('请输入收款人账户：')
 		transfer_amount = input('请输入转账金额：')
 		transfer(reverse_usr, transfer_amount)
 		print('转账成功!\n请继续选择:')

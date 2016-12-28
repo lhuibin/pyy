@@ -1,9 +1,12 @@
+#!/usr/bin/env python
+# coding=utf-8
+
 '''购物模块'''
 
 # 1.  查询使用可变参数，修改商品 价格设置为可选
 
-import pickle, time
-
+import pickle
+import time
 
 #读取信息
 def reading_info(order):
@@ -15,7 +18,6 @@ def reading_info(order):
 		with open('shopping_list.db', 'rb') as f:
 			shopping_list = pickle.load(f)
 		return shopping_list
-		print('读取值',shopping_list)
 	elif order == 'usr_account':
 		with open('usr_account.db', 'rb') as f:
 			usr_account = pickle.load(f)
@@ -85,13 +87,13 @@ def function():
 	shppping_list_check()
 	usr_account = reading_info('usr_account')
 	usr_account[usr_name][1] -= total_value
-	operate, info, value_op, balance_log = '支出', '    网上网物     ', '-'+total_value, usr_account[usr_name][1]  
+	operate, info, value_op, balance_log = 'pay', '    shopping oneline     ', '-'+total_value, usr_account[usr_name][1]  
 	usr_log_save(operate, info, value_op, balance_log)
 
 #欢迎信息
-print('欢迎您访问！以下是商品列表，请选择您需要的商品：\n------------------------------------\n|  名称  |  库存  |  价格  |')
+print('welcome! Please choose the producters:\n------------------------------------\n|  name  |  stock  |  price  |')
 print_shopping_list()
-usr_input = input('请输入您要购买的商品和数量(商品名 数量):').split()
+usr_input = raw_input('Producters(name quantity):').split()
 p_name, s_amount = usr_input[0], int(usr_input[1])
 shopping_list_func(p_name, s_amount)
 shppping_list_check()

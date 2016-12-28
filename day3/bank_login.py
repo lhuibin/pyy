@@ -95,7 +95,7 @@ def creat_account(usr_name, usr_pwd, amount=15000):
 	usr_info = r_w_db('usr_info_r')
 	usr_info[usr_name]=[[time.asctime(), '开户', '    ', '    ', amount]]
 	r_w_db('usr_info_w')
-	return print('注册成功!',usr_info)
+	return ('注册成功!',usr_info)
 
 #修改密码
 def pwd_update(usr_name, usr_pwd, new_pwd):
