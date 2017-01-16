@@ -6,8 +6,10 @@
 
 #4 自己不能给自己转账， 转账要检查余额
 #5 每月月底自动生成账单功能
+import sys
 
 import hashlib, pickle, time, bank_login
+
 #读取用户数据
 with open('usr_info.db', 'rb') as f:
 	usr_info = pickle.load(f)
@@ -68,7 +70,7 @@ def account_list():
 
 # 选择操作
 items = {'1': '取现', '2': '存款', '3': '转账', '4': '查询', '5': '退出'}
-print('\n    %s，你好！请选择项目：' % bank_login.usr_name)
+print(u'\n    %s，你好！请选择项目：' % bank_login.usr_name)
 def op_list():
 	print('----------')
 	for k, v in items.items():
